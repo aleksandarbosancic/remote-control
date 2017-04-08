@@ -1,0 +1,1 @@
+java -cp Remote-Control-1.0-SNAPSHOT.jar com.abosancic.remote.control.server.SetPassword
