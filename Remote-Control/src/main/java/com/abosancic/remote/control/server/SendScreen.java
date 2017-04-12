@@ -11,6 +11,9 @@ import javax.imageio.ImageIO;
 class SendScreen extends Thread
 {
 
+    static final int PAYLOAD_BLOCKLENGTH = 4;
+    static String IMAGE_FORMAT = "jpg";
+    
     Socket socket = null;
     Robot robot = null;
     Rectangle rectangle = null;
@@ -41,10 +44,14 @@ class SendScreen extends Thread
 
         while (continueLoop)
         {
-            BufferedImage image = robot.createScreenCapture(rectangle);
 
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            ImageIO.write(image, IMAGE_FORMAT, baos);
+//            oos.write(ByteBuffer.allocate(PAYLOAD_BLOCKLENGTH).putInt(baos.size()).array());
+//            oos.write(baos.toByteArray());
             try
             {
+                BufferedImage image = robot.createScreenCapture(rectangle);
                 ImageIO.write(image, "jpeg", oos);
             }
             catch (IOException ex)
@@ -55,7 +62,7 @@ class SendScreen extends Thread
 
             try
             {
-                Thread.sleep(100);
+                Thread.sleep(500);
             }
             catch (InterruptedException e)
             {

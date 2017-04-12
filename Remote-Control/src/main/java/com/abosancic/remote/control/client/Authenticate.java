@@ -76,8 +76,18 @@ class Authenticate extends JFrame implements ActionListener
             {
                 e.printStackTrace();
             }
-            CreateFrame abc = new CreateFrame(cSocket, width, height);
-            dispose();
+            //CreateFrame abc = new CreateFrame(cSocket, width, height);
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable()
+            {
+                public void run()
+                {
+                    RemoteDesktop rd = new RemoteDesktop(cSocket, width, height);
+                    new Thread(rd).start();
+                    rd.setVisible(true);
+                    dispose();
+                }
+            });
         }
         else
         {
